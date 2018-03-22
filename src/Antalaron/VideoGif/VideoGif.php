@@ -40,6 +40,7 @@ class VideoGif
         'height' => 404,
         'count' => 5,
         'interval' => 50,
+    		'binaries' => []
     );
 
     /**
@@ -78,8 +79,8 @@ class VideoGif
         $height = $height ?: $this->defaults['height'];
 
         try {
-            $ffmpeg = FFMpeg::create();
-            $ffprobe = FFProbe::create();
+        		$ffmpeg = FFMpeg::create($this->defaults['binaries']);
+        		$ffprobe = FFProbe::create($this->defaults['binaries']);
         } catch (\Exception $e) {
             throw new VideoException('Cannot start FFMpeg or FFProbe', 0, $e);
         }
